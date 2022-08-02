@@ -9,22 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iconify/icons-bi": "^1.2.7",
     "bootstrap": "^5.2.0",
     "next": "12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
     "sass": "^1.54.0",
     "scss": "^0.2.4"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "@types/node": "18.0.6",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.8",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.2",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.6",
+    "tailwindcss": "^3.1.7",
     "typescript": "4.7.4"
   }
 }

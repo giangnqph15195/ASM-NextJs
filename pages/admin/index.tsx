@@ -1,39 +1,44 @@
 import React from 'react'
+import adminLayout from '../../components/LayoutAdmin/adminLayout'
 
-type Props = {}
 
-const admin = (props: Props) => {
+const Admin = () => {
     return (
         <div>
-            <div id="wrapper">
-                <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                    <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                        <div className="sidebar-brand-icon rotate-n-15">
-                            <i className="fas fa-laugh-wink"></i>
-                        </div>
-                        <div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-                    </a>
-                    <li className="nav-item active">
-                        <a className="nav-link" href="index.html">
-                            <span>Dashboard</span></a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                            aria-expanded="true" aria-controls="collapseTwo">
-                            <i className="fas fa-fw fa-cog"></i>
-                            <span>List</span>
-                        </a>
-                        <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                            <div className="bg-white py-2 collapse-inner rounded">
-                                <a className="collapse-item" href="">Product</a>
-                                <a className="collapse-item" href="">Category</a>
-                                <a className="collapse-item" href="">User</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            nooij dung
+            {/* <table className='table'>
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table> */}
         </div>
     )
 }
-export default admin
+Admin.Layout = adminLayout
+
+export default Admin
