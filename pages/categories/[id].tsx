@@ -1,22 +1,25 @@
+import { GetServerSideProps, GetServerSidePropsContext, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import Link from 'next/link'
-import React, { useEffect } from 'react'
-import NumberFormat from 'react-number-format'
+import React, { useEffect, useState } from 'react'
+import NumberFormat from 'react-number-format';
 import usercategories from '../../hooks/categories'
 import useProduct from '../../hooks/product'
-import { CateType } from '../../type/categories'
-import { Iproduct } from '../../type/products'
-import style from '../../styles/Home.module.css'
+import { CateType } from '../../type/categories';
+import { Iproduct } from '../../type/products';
+import style from '../../../styles/Home.module.css'
 
-type Props = {}
+type ProductProps = {
+  product: Iproduct;
+}
+const CateProduct = ({product}: ProductProps) => {
 
-const ProductList = (props: Props) => {
     const { data: cate } = usercategories();
     // if (!cate) return <div>Loading....</div>
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data, error, mutate } = useProduct()
     if (!data) return <div className={style.load_man}></div>
-    if (error) return <div >Error !</div>
+    if (error) return <div>Error !</div>
     return (
         <div>
             <main>
@@ -49,7 +52,7 @@ const ProductList = (props: Props) => {
                                 </div>
                                 <ul className="block">
                                     {
-                                        cate.map((item: CateType) => (
+                                        cate.map((item:CateType) => (
                                             // eslint-disable-next-line react/jsx-key
                                             <li className="cate hover hover:bg-[#ff6c8d]"><Link href={`/categories/${item._id}`}>{item.name}</Link></li>
                                         ))
@@ -99,10 +102,9 @@ const ProductList = (props: Props) => {
                         </div>
 
                         <div className="product-mian">
-                            {data.map((item: Iproduct) => (
+                            {product.products.map((item:Iproduct) => (
                                 // eslint-disable-next-line react/jsx-key
-                               <Link href={`products/${item._id}`}>
-                                 <div className="product-small box shadow 0 h-fit hover:shadow-lg">
+                                <div className="product-small box shadow 0 h-fit hover:shadow-lg">
                                     <div className="product-img">
                                         <img className="w-[100%] h-[208px]"
                                             src={`${item.image}`}
@@ -115,15 +117,15 @@ const ProductList = (props: Props) => {
                                     </div>
                                     <div className="price-wrapper pb-[10px]">
                                         <p className="price">
-                                            <NumberFormat
+                                        <NumberFormat
                                                 thousandsGroupStyle='thousand'
                                                 value={item.price}
                                                 displayType="text"
                                                 thousandSeparator={true}
-                                            /> ₫</p>
+                                            /> ₫
+                                        </p>
                                     </div>
                                 </div>
-                               </Link>
                             ))}
                         </div>
 
@@ -131,7 +133,27 @@ const ProductList = (props: Props) => {
                 </div>
             </main>
         </div>
+
     )
 }
+export const getStaticPaths: GetStaticPaths = async () => {
+    const data = await (await fetch(`http://localhost:3001/api/categorys`)).json();
+    const paths = data.map((product: any) => (
+        { params: { id: product._id } }
+    ))
+    return {
+        paths,
+        fallback: true // blocking or true
+    }
+}
+// server
+export const getStaticProps: GetStaticProps<ProductProps> = async (context: GetStaticPropsContext) => {
+    console.log('context', context);
+    const product = await (await fetch(`http://localhost:3001/api/category/${context.params?.id}`)).json();
+    return {
+        props: { product },
+        revalidate: 5
+    }
 
-export default ProductList
+}
+export default CateProduct
